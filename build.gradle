@@ -34,8 +34,8 @@ application {
     mainClass.set("mn.jwt.sample.Application")
 }
 java {
-    sourceCompatibility = JavaVersion.toVersion("13")
-    targetCompatibility = JavaVersion.toVersion("13")
+    sourceCompatibility = JavaVersion.toVersion("1.8")
+    targetCompatibility = JavaVersion.toVersion("1.8")
 }
 
 // intellijのgradleのコンソール文字化け防止
