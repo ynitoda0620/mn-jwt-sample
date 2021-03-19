@@ -28,6 +28,8 @@ micronaut:
       jwt:
         enabled: true # default
         generator:
+          access-token:
+            expiration: 360 # アクセストークンの有効期限(秒)
           refresh-token: #signatures.secret と一緒に記述すると、/oauth/access_token へのリフレッシュトークン取得のためののPOSTリクエストがUnauthorizedになる
             enabled: true # default
             jws-algorithm: "HS256" # default
