@@ -23,9 +23,18 @@ micronaut:
     authentication: bearer
     token:
       jwt:
-        signatures:
-          secret:
-            generator:
-              secret: secret01234567890ABCDEFGHIJKLMNO # 32文字以上
-              refresh-token:
-                secret: pleaseChangeThisSecretForANewOne
+        enabled: true # default
+        generator:
+          refresh-token: #signatures.secret と一緒に記述すると、/oauth/access_token へのリフレッシュトークン取得のためののPOSTリクエストがUnauthorizedになる
+            enabled: true # default
+            jws-algorithm: "HS256" # default
+            secret: secret01234567890ABCDEFGHIJKLMNO # 32文字以上
+            base64 : false # default
+datasources:
+  default:
+    url: jdbc:h2:mem:devDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE
+    driverClassName: org.h2.Driver
+    username: sa
+    password: ''
+    schema-generate: CREATE_DROP
+    dialect: H2
