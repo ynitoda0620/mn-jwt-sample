@@ -27,6 +27,10 @@ dependencies {
     runtimeOnly("ch.qos.logback:logback-classic")
     annotationProcessor "io.micronaut.security:micronaut-security-annotations"
     implementation "io.micronaut.security:micronaut-security-jwt"
+    annotationProcessor("io.micronaut.data:micronaut-data-processor")
+    implementation("io.micronaut.data:micronaut-data-jdbc")
+    runtime("com.h2database:h2")
+    runtime("io.micronaut.sql:micronaut-jdbc-hikari")
 }
 
 

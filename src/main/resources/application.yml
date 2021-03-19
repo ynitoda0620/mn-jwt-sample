@@ -27,3 +27,5 @@ micronaut:
           secret:
             generator:
               secret: secret01234567890ABCDEFGHIJKLMNO # 32文字以上
+              refresh-token:
+                secret: pleaseChangeThisSecretForANewOne
