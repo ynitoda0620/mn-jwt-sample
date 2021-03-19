@@ -1,7 +1,25 @@
 micronaut:
+  router:
+    static-resources:
+      default:
+        enabled: true
+        paths:
+          - "classpath:static" # main/resources/static 配下のリソースにアクセスできる
   application:
     name: mnJwtSample
   security:
+    enabled: true
+    intercept-url-map: # Intercept URL Map で認証の有無を設定できる。主に、画像なの静的リソースを公開するときに使う。
+      -
+        pattern: "/url-map-anonymous"
+        http-method: GET
+        access:
+          - isAnonymous()
+      -
+        pattern: "/sample.png" # main/resources/static からの相対パス
+        http-method: GET
+        access:
+          - isAnonymous()
     authentication: bearer
     token:
       jwt:

@@ -19,4 +19,12 @@ public interface AppClient {
     @Consumes(MediaType.TEXT_PLAIN)
     @Get
     String home(@Header("Authorization") String token);
+
+    @Consumes(MediaType.TEXT_PLAIN)
+    @Get("/anonymous")
+    String anonymous();
+
+    @Consumes(MediaType.TEXT_PLAIN)
+    @Get("/url-map-anonymous")
+    String urlMapAnonymous();
 }

@@ -43,4 +43,18 @@ public class JwtAuthenticationWithClientTest {
 
         Assertions.assertEquals(msg, username);
     }
+
+    @Test
+    public void anonymous_access() {
+        String msg = client.anonymous();
+
+        Assertions.assertEquals(msg, "anonymous");
+    }
+
+    @Test
+    public void anonymous_access_url_map() {
+        String msg = client.urlMapAnonymous();
+
+        Assertions.assertEquals(msg, "url map anonymous");
+    }
 }
