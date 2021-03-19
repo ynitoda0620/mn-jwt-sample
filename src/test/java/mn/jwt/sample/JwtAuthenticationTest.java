@@ -83,6 +83,7 @@ class JwtAuthenticationTest {
         String preAccessToken = rsp1.body().getAccessToken();
 
         // 1秒(1万ミリ秒)間だけ処理を止める
+        // 停止しないと、「リフレッシュ前のアクセストークン」と「リフレッシュ後のアクセストークン」が同じになってしまう
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
