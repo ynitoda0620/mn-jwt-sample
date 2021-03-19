@@ -9,6 +9,7 @@ import io.micronaut.http.annotation.Post;
 import io.micronaut.http.client.annotation.Client;
 import io.micronaut.security.authentication.UsernamePasswordCredentials;
 import io.micronaut.security.token.jwt.render.BearerAccessRefreshToken;
+import mn.jwt.sample.entity.User;
 
 @Client("/")
 public interface AppClient {
@@ -16,9 +17,9 @@ public interface AppClient {
     @Post("/login")
     BearerAccessRefreshToken login(@Body UsernamePasswordCredentials credentials);
 
-    @Consumes(MediaType.TEXT_PLAIN)
+    @Consumes(MediaType.APPLICATION_JSON)
     @Get
-    String home(@Header("Authorization") String token);
+    User home(@Header("Authorization") String token);
 
     @Consumes(MediaType.TEXT_PLAIN)
     @Get("/anonymous")

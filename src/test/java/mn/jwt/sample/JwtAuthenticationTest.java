@@ -11,6 +11,7 @@ import io.micronaut.security.authentication.UsernamePasswordCredentials;
 import io.micronaut.security.token.jwt.endpoints.TokenRefreshRequest;
 import io.micronaut.security.token.jwt.render.AccessRefreshToken;
 import io.micronaut.security.token.jwt.render.BearerAccessRefreshToken;
+import mn.jwt.sample.entity.User;
 import org.junit.jupiter.api.Assertions;
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest;
 import org.junit.jupiter.api.Test;
@@ -49,12 +50,12 @@ class JwtAuthenticationTest {
         // ログイン後に取得したアクセストークンで認証
         String accessToken = bearerAccessRefreshToken.getAccessToken();
         HttpRequest<Object> requestWithAuthorization = HttpRequest.GET("/")
-                .accept(MediaType.TEXT_PLAIN)
+                .accept(MediaType.APPLICATION_JSON)
                 .bearerAuth(accessToken);
-        HttpResponse<String> response = client.toBlocking().exchange(requestWithAuthorization, String.class);
+        HttpResponse<User> response = client.toBlocking().exchange(requestWithAuthorization, User.class);
 
         Assertions.assertEquals(response.getStatus(), HttpStatus.OK);
-        Assertions.assertEquals(response.body(), username);
+        Assertions.assertEquals(response.body().getUsername(), username);
     }
 
     @Test
@@ -141,11 +142,11 @@ class JwtAuthenticationTest {
 
         // リフレッシュされたアクセストークンで認証
         HttpRequest<Object> requestWithAuthorization = HttpRequest.GET("/")
-                .accept(MediaType.TEXT_PLAIN)
+                .accept(MediaType.APPLICATION_JSON)
                 .bearerAuth(accessRefreshToken);
-        HttpResponse<String> response = client.toBlocking().exchange(requestWithAuthorization, String.class);
+        HttpResponse<User> response = client.toBlocking().exchange(requestWithAuthorization, User.class);
 
         Assertions.assertEquals(response.getStatus(), HttpStatus.OK);
-        Assertions.assertEquals(response.body(), username);
+        Assertions.assertEquals(response.body().getUsername(), username);
     }
 }

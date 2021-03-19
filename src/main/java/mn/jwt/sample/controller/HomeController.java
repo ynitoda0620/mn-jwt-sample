@@ -1,5 +1,6 @@
 package mn.jwt.sample.controller;
 
+import io.micronaut.http.HttpResponse;
 import io.micronaut.http.MediaType;
 import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Get;
@@ -9,14 +10,16 @@ import io.micronaut.security.rules.SecurityRule;
 
 import java.security.Principal;
 
+import mn.jwt.sample.entity.User;
+
 @Controller
 public class HomeController {
 
     @Secured(SecurityRule.IS_AUTHENTICATED)
-    @Produces(MediaType.TEXT_PLAIN)
+    @Produces(MediaType.APPLICATION_JSON)
     @Get
-    public String index(Principal principal) {
-        return principal.getName();
+    public User index(Principal principal) {
+        return new User(principal.getName());
     }
 
     @Secured(SecurityRule.IS_ANONYMOUS) // 不特定多数がアクセス可能

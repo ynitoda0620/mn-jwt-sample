@@ -6,6 +6,7 @@ import io.micronaut.security.authentication.UsernamePasswordCredentials;
 import io.micronaut.security.token.jwt.render.BearerAccessRefreshToken;
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest;
 import mn.jwt.sample.client.AppClient;
+import mn.jwt.sample.entity.User;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -39,9 +40,9 @@ public class JwtAuthenticationWithClientTest {
         Assertions.assertEquals(loginRsp.getUsername(),  username);
 
         // ログイン後に取得したアクセストークンで認証
-        String msg = client.home("Bearer " + accessToken);
+        User user = client.home("Bearer " + accessToken);
 
-        Assertions.assertEquals(msg, username);
+        Assertions.assertEquals(user.getUsername(), username);
     }
 
     @Test
