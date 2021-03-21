@@ -26,7 +26,7 @@ public class AuthenticationProviderUserPassword implements AuthenticationProvide
                 emitter.onNext(new UserDetails((String) authenticationRequest.getIdentity(), new ArrayList<>()));
                 emitter.onComplete();
             } else {
-                emitter.onError(new AuthenticationException(new AuthenticationFailed()));
+                emitter.onError(new AuthenticationException(new AuthenticationFailed("ユーザー名またはパスワードが不正です。")));
             }
         }, BackpressureStrategy.ERROR);
     }
